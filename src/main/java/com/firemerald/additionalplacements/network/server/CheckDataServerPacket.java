@@ -38,11 +38,15 @@ public class CheckDataServerPacket extends ServerLoginPacket
 
 	public CheckDataServerPacket(FriendlyByteBuf buf)
 	{
-		serverData = buf.readMap(FriendlyByteBuf::readResourceLocation, buf2 -> {
-			CompoundTag clientTag = buf2.readNbt();
-			List<MessageTree> clientErrors = buf2.readList(MessageTree::new);
-			return Pair.of(clientTag, clientErrors);
-		});
+		if (buf.readableBytes() > 0) {
+			serverData = buf.readMap(FriendlyByteBuf::readResourceLocation, buf2 -> {
+				CompoundTag clientTag = buf2.readNbt();
+				List<MessageTree> clientErrors = buf2.readList(MessageTree::new);
+				return Pair.of(clientTag, clientErrors);
+			});
+		} else {
+			serverData = new HashMap<>();
+		}
 	}
 
 	@Override
