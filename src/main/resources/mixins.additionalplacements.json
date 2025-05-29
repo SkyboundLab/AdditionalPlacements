@@ -12,7 +12,6 @@
     "MixinServerPlayer",
     "MixinSlabBlock",
     "MixinStairBlock",
-    "MixinStructureTransform",
     "MixinWeightedPressurePlateBlock"
   ],
   "client": [
